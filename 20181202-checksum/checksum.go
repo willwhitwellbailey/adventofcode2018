@@ -16,7 +16,7 @@ func getFileAsString(file string) string {
 	return string(byteString)
 }
 
-func createMap(s string) map[string]int {
+func createMap(str string) map[string]int {
 	// create map of character + count of character within string
 	// ie ccabcacc -->
 	// {
@@ -27,7 +27,7 @@ func createMap(s string) map[string]int {
 
 	m := make(map[string]int)
 
-	for _, c := range s {
+	for _, c := range str {
 		m[string(c)]++
 	}
 
@@ -46,12 +46,9 @@ func evalCharCount(m map[string]int, count int) bool {
 func main() {
 	inputs := strings.Split(getFileAsString("input.txt"), "\n")
 
-	var m map[string]int
 	var doublesCount, triplesCount int = 0, 0
 	for i := 0; i < len(inputs); i++ {
-		fmt.Printf("input %d : %s\n", i, inputs[i])
-		m = createMap(inputs[0])
-		fmt.Printf("map %d with length %d : %v\n", i, len(m), m)
+		m := createMap(inputs[i])
 
 		if evalCharCount(m, 2) {
 			doublesCount++
@@ -62,6 +59,6 @@ func main() {
 		}
 	}
 
-	// fmt.Printf("doubles: %d triples %d\n", doublesCount, triplesCount)
+	fmt.Printf("doubles: %d triples %d\n", doublesCount, triplesCount)
 	fmt.Println("checksum is ", doublesCount*triplesCount)
 }
