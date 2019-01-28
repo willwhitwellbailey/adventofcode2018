@@ -7,7 +7,6 @@ import (
 
 // if we've gotten here, we already know that the strings are the same length
 func similarChars(s1 string, s2 string) string {
-	// would be better if a Builder was used, but let's keep it
 	var simChars strings.Builder
 	for i := 0; i < len(s1); i++ {
 		if s1[i] == s2[i] {
