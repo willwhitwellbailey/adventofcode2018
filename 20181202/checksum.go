@@ -2,19 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strings"
 )
-
-func getFileAsString(file string) string {
-	byteString, err := ioutil.ReadFile("input.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return string(byteString)
-}
 
 func createMap(str string) map[string]int {
 	// create map of character + count of character within string
@@ -44,7 +33,7 @@ func evalCharCount(m map[string]int, count int) bool {
 }
 
 func main() {
-	inputs := strings.Split(getFileAsString("input.txt"), "\n")
+	inputs := strings.Split(GetFileAsString("input.txt"), "\n")
 
 	var doublesCount, triplesCount int = 0, 0
 	for i := 0; i < len(inputs); i++ {
