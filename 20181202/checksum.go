@@ -32,7 +32,8 @@ func evalCharCount(m map[string]int, count int) bool {
 	return false
 }
 
-func main() {
+func Checksum() {
+	fmt.Println("-----------------------------")
 	inputs := strings.Split(GetFileAsString("input.txt"), "\n")
 
 	var doublesCount, triplesCount int = 0, 0
@@ -50,4 +51,5 @@ func main() {
 
 	fmt.Printf("doubles: %d triples %d\n", doublesCount, triplesCount)
 	fmt.Println("checksum is ", doublesCount*triplesCount)
+	fmt.Println("-----------------------------")
 }

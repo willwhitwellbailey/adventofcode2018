@@ -16,6 +16,7 @@ func contains(slice []int64, n int64) bool {
 }
 
 func DuplicateFrequencyFinder() {
+	fmt.Println("-----------------------------")
 	inputs := strings.Split(GetFileAsString("input.txt"), "\n")
 
 	const MAX_FREQUENCY_LOOP_COUNT int = 500
