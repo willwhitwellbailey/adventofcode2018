@@ -2,20 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strconv"
 	"strings"
 )
-
-func getFileAsString(file string) string {
-	byteString, err := ioutil.ReadFile("input.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return string(byteString)
-}
 
 func contains(slice []int64, n int64) bool {
 	for _, num := range slice {
@@ -26,8 +15,9 @@ func contains(slice []int64, n int64) bool {
 	return false
 }
 
-func main() {
-	inputs := strings.Split(getFileAsString("input.txt"), "\n")
+func DuplicateFrequencyFinder() {
+	fmt.Println("-----------------------------")
+	inputs := strings.Split(GetFileAsString("input.txt"), "\n")
 
 	const MAX_FREQUENCY_LOOP_COUNT int = 500
 
@@ -50,6 +40,7 @@ func main() {
 			if contains(frequencies, frequency) {
 				foundDuplicate = true
 				fmt.Println("Duplicate encountered", frequency)
+				fmt.Println("Found within loop", loop)
 				break
 			}
 
@@ -59,8 +50,8 @@ func main() {
 			//   my machine started slowing down around the 70th loop (took 144)
 			frequencies = append(frequencies, frequency)
 		}
-		fmt.Println("loop completed", loop)
 	}
 
 	fmt.Println(frequency)
+	fmt.Println("-----------------------------")
 }

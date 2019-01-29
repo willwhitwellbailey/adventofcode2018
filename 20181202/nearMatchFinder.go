@@ -16,7 +16,8 @@ func similarChars(s1 string, s2 string) string {
 	return simChars.String()
 }
 
-func main() {
+func NearMatchFinder() {
+	fmt.Println("-----------------------------")
 	inputs := strings.Split(GetFileAsString("input.txt"), "\n")
 
 	for i := 0; i < len(inputs); i++ {
@@ -43,4 +44,5 @@ func main() {
 			}
 		}
 	}
+	fmt.Println("-----------------------------")
 }
