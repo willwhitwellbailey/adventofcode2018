@@ -21,6 +21,7 @@ func GetClaimCornerCoordinates(claim string) (int64, int64) {
 	return cornerX, cornerY
 }
 
+// Get the Width and Height Dimensions from a claim
 func GetClaimDims(claim string) (int64, int64) {
 	claimDims := strings.Split(strings.Split(claim, " ")[3], "x")
 	width, _ := strconv.ParseInt(claimDims[0], 10, 0)
@@ -35,4 +36,19 @@ func GetMapKeyInt64(i int64, j int64) string {
 
 func GetMapKeyInt(i int, j int) string {
 	return GetMapKeyInt64(int64(i), int64(j))
+}
+
+func GetClaimMap(claim string) map[string]bool {
+	claimX, claimY := GetClaimCornerCoordinates(claim)
+	claimW, claimH := GetClaimDims(claim)
+
+	claimMap := make(map[string]bool)
+	for i := claimX; i < claimX+claimW; i++ {
+		for j := claimY; j < claimY+claimH; j++ {
+			mapKey := GetMapKeyInt64(i, j)
+			claimMap[mapKey] = true
+		}
+	}
+
+	return claimMap
 }
