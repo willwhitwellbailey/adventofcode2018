@@ -94,6 +94,22 @@ class Guard {
       return minutesMap;
     }, new Map());
   }
+
+  getMaxMinute() {
+    let maxMinute = { 
+      minute: -1,
+      value: -1
+    };
+    this.getMinutesMap().forEach((value, minute) => {
+      if (value > maxMinute.value) {
+        maxMinute = {
+          minute,
+          value
+        };
+      }
+    });
+    return maxMinute;
+  }
 }
 
 let inputs = getFileContents('input.txt').split('\r\n').sort();
@@ -132,9 +148,12 @@ let sleepRecord = []
 guards.forEach((value, key) => {
   sleepRecord.push({
     guardNumber: key,
-    totalSleepTime: value.getMinutesAsleep()
+    totalSleepTime: value.getMinutesAsleep(),
+    maxMinute: value.getMaxMinute()
   });
 });
+
+// problem 1 max sleeper x max minute
 sleepRecord.sort((a, b) => {
   if (a.totalSleepTime < b.totalSleepTime) return -1;
   if (a.totalSleepTime > b.totalSleepTime) return 1;
@@ -142,21 +161,18 @@ sleepRecord.sort((a, b) => {
 })
 
 // biggest sleeper is!!:
-let biggestSleeper = guards.get(sleepRecord[sleepRecord.length - 1].guardNumber)
+let biggestSleeper = sleepRecord[sleepRecord.length - 1];
+console.log(`guardNumber ${biggestSleeper.guardNumber} slept the most during minute ${biggestSleeper.maxMinute.minute} (${biggestSleeper.maxMinute.value})`);
+console.log(`solution 1: ${biggestSleeper.guardNumber * biggestSleeper.maxMinute.minute}`);
 
-// greatest minutes is!!:
-let greatestMinute = { 
-  minute: -1,
-  value: -1
-};
-biggestSleeper.getMinutesMap().forEach((value, minute) => {
-  if (value > greatestMinute.value) {
-    greatestMinute = {
-      minute,
-      value
-    };
-  }
-})
+// problem 2 max minute x guard
+sleepRecord.sort((a, b) => {
+  if (a.maxMinute.value < b.maxMinute.value) return -1;
+  if (a.maxMinute.value > b.maxMinute.value) return 1;
+  return 0;
+});
 
-console.log(`guardNumber ${biggestSleeper.guardNumber} slept the most during ${greatestMinute.minute} value (${greatestMinute.value})`);
-console.log(`solution: ${biggestSleeper.guardNumber * greatestMinute.minute}`);
+// max minute holder is!!:
+let maxMinuteHolder = sleepRecord[sleepRecord.length - 1];
+console.log(`guardNumber ${maxMinuteHolder.guardNumber} slept the most during minute ${maxMinuteHolder.maxMinute.minute} (${maxMinuteHolder.maxMinute.value})`);
+console.log(`solution 2: ${maxMinuteHolder.guardNumber * maxMinuteHolder.maxMinute.minute}`)
